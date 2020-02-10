@@ -77,5 +77,19 @@ public class MovieFacade {
             em.close();
         }
     }
+    
+    public Movie addMovie(int year, String name, String[] actors){
+        Movie movie = new Movie (year, name, actors);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(movie);
+            em.getTransaction().commit();
+            return movie;
+        }finally{
+            em.close();
+        }
+    }
+
 
 }

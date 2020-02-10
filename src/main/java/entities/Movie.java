@@ -29,9 +29,7 @@ public class Movie implements Serializable {
         this.name = name;
         this.actors = actors;
     }
-    
-    
-        
+     
     public Long getId() {
         return id;
     }
