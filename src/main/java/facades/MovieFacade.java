@@ -1,33 +1,36 @@
 package facades;
 
-import entities.RenameMe;
+import dto.MovieDTO;
+import entities.Movie;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-public class FacadeExample {
+public class MovieFacade {
 
-    private static FacadeExample instance;
+    private static MovieFacade instance;
     private static EntityManagerFactory emf;
-    
+
     //Private Constructor to ensure Singleton
-    private FacadeExample() {}
-    
-    
+    private MovieFacade() {
+    }
+
     /**
-     * 
+     *
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static FacadeExample getFacadeExample(EntityManagerFactory _emf) {
+    public static MovieFacade getFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new FacadeExample();
+            instance = new MovieFacade();
         }
         return instance;
     }
@@ -35,17 +38,44 @@ public class FacadeExample {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+    public long getMovieCount() {
         EntityManager em = emf.createEntityManager();
-        try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
-        }finally{  
+        try {
+            long movieCount = (long) em.createQuery("SELECT COUNT(r) FROM Movie r").getSingleResult();
+            return movieCount;
+        } finally {
             em.close();
         }
-        
+
+    }
+
+    public List<MovieDTO> getMovieByName(String name) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Movie> query = em.createQuery("SELECT m from Movie m WHERE m.name like :name", Movie.class);
+            query.setParameter("name", name);
+            List<MovieDTO> movieDTOFromName = new ArrayList();
+            List<Movie> movieFromName = query.getResultList();
+            for (Movie movie : movieFromName){
+                movieDTOFromName.add(new MovieDTO(movie));
+            }
+            return movieDTOFromName;
+            
+        }finally{
+            em.close();
+        }
+
+    }
+    public Movie getMovieByID (int id){
+        EntityManager em = emf.createEntityManager();
+        try{
+            Movie movie = em.find(Movie.class,(long)id);
+            return movie;
+        }finally{
+            em.close();
+        }
     }
 
 }
