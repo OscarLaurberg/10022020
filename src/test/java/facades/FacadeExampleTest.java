@@ -49,10 +49,17 @@ public class FacadeExampleTest {
         facade = MovieFacade.getFacadeExample(emf);
     }
 
-    @AfterAll
-    public static void tearDownClass() {
-//        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
-    }
+//    @AfterAll
+//    public static void tearDownClass() {
+//        EntityManager em = emf.createEntityManager();
+//        try {
+//            em.getTransaction().begin();
+//            em.createNamedQuery("Movie.deleteAllRows").executeUpdate();
+//            em.getTransaction().commit();
+//        }finally{
+//            em.close();
+//        }
+//    }
 
     // Setup the DataBase in a known state BEFORE EACH TEST
     //TODO -- Make sure to change the script below to use YOUR OWN entity class
@@ -92,11 +99,20 @@ public class FacadeExampleTest {
     }
 //    @Test
 //    public void testMovieByID(){
-//        Movie movie = facade.getMovieByID(4);
+//        Movie movie = facade.getMovieByID(1);
 //        String expected = "Il Nombre Del Padre";
 //        String result = movie.getName();
 //        assertEquals (expected,result);
 //
 //    }
+    
+    @Test
+    public void testAddMovie(){
+        Long expected = 4L;
+        String[] actorArray = new String[]{"Crash Bandicoot", "Tom Hanks", "Spyro"};
+        facade.addMovie(1993, "Testfilm", actorArray);
+        Long result = facade.getMovieCount();
+        assertEquals(expected,result);
+    }
 
 }

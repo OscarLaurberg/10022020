@@ -73,7 +73,7 @@ public class MovieFacade {
         try{
             Movie movie = em.find(Movie.class,(long)id);
             return movie;
-        }finally{
+        }finally{ 
             em.close();
         }
     }
