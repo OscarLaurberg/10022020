@@ -51,45 +51,54 @@ public class MovieFacade {
 
     }
 
-    public List<MovieDTO> getMovieByName(String name) {
+    public List<Movie> getMovieByName(String name) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Movie> query = em.createQuery("SELECT m from Movie m WHERE m.name like :name", Movie.class);
             query.setParameter("name", name);
-            List<MovieDTO> movieDTOFromName = new ArrayList();
-            List<Movie> movieFromName = query.getResultList();
-            for (Movie movie : movieFromName){
-                movieDTOFromName.add(new MovieDTO(movie));
-            }
-            return movieDTOFromName;
-            
-        }finally{
+            List<Movie> movies = query.getResultList();
+            return movies;
+        } finally {
             em.close();
         }
 
     }
-    public Movie getMovieByID (int id){
+
+    public Movie getMovieByID(int id) {
         EntityManager em = emf.createEntityManager();
-        try{
-            Movie movie = em.find(Movie.class,(long)id);
+        try {
+            Movie movie = em.find(Movie.class, (long) id);
             return movie;
-        }finally{ 
+        } finally {
             em.close();
         }
     }
-    
-    public Movie addMovie(int year, String name, String[] actors){
-        Movie movie = new Movie (year, name, actors);
+
+    public Movie addMovie(int year, String name, String[] actors) {
+        Movie movie = new Movie(year, name, actors);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(movie);
             em.getTransaction().commit();
             return movie;
-        }finally{
+        } finally {
             em.close();
         }
     }
 
+    public void addMovies(List<Movie> movies) {
+        for (Movie movie : movies) {
+            addMovie(movie.getYear(), movie.getName(), movie.getActors());
+        }
+
+    }
+
+    public List<Movie> getAllMovies() {
+        EntityManager em = getEntityManager();
+        TypedQuery q = em.createQuery("SELECT m FROM Movie M", Movie.class);
+        return q.getResultList();
+
+    }
 
 }
