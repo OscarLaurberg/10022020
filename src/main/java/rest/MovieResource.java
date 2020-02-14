@@ -88,9 +88,9 @@ public class MovieResource {
         return GSON.toJson(allMovies);
     
 }
-    
+    //movie/add
     @POST
-    @Path("movie/add")
+    @Path("add")
     @Consumes({MediaType.APPLICATION_JSON})
     public void addMovies(String json){
      List<Movie> movies = GSON.fromJson(json, new TypeToken<List<Movie>>(){}.getType()); 
