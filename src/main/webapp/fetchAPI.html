@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Fetch!</title>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            td{
+                padding: 3px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>Her arbejder vi med verdens langsomste API:</h2>
+        <input type ='number' id='userNumber' value=''/><button id='getUser'>Fetch!</button><button id='getAllUsers'>Fetch all!</button>
+        <div id='userFromId'></div>
+    </body>
+
+    <script>
+
+        function getUser(evt) {
+            const userID = document.getElementById('userNumber').value;
+            (fetch("https://jsonplaceholder.typicode.com/users/" + userID)
+                    .then(res => res.json()) //in flow1, just do it
+                    .then(data => {
+                        // Inside this callback, and only here, the response data is available
+                        //console.log("data", data);
+                        /* data now contains the response, converted to JavaScript
+                         Observe the output from the log-output above
+                         Now, just build your DOM changes using the data*/
+                        let result = `Name: ${data.name}                        
+                        Phone: ${data.phone}
+
+                        Address:
+                        Street: ${data.address.street}
+                        City: ${data.address.city}
+                        Zip: ${data.address.zipcode}
+                        Geo(lat,lng): ${data.address.geo.lat},${data.address.geo.lng}`;
+
+                        document.getElementById('userFromId').innerText = result;
+                    }));
+        }
+
+        function getAllUsers(evt) {
+            (fetch("https://jsonplaceholder.typicode.com/users")
+                    .then(res => res.json()) //in flow1, just do it
+                    .then(data => {
+                        //console.log("data", data);
+                        let tableString = "<table> <tr> <th>Name</th><th>Phone</th></tr>";
+                        let userTableArray = data.map(data => data = `<tr><td>${data.name} </td><td>${data.phone} </td></tr>`);
+                        userTableArray.forEach(data => {
+                            tableString += data;
+                        });
+                        tableString += "</table> </tr>";
+                        document.getElementById("userFromId").innerHTML = tableString;
+                        console.log(tableString);
+
+
+
+
+                    }));
+
+
+        }
+
+
+
+        document.getElementById('getUser').addEventListener("click", getUser);
+        document.getElementById('getAllUsers').addEventListener("click", getAllUsers);
+    </script>
+
+</html>

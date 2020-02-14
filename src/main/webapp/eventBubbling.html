@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>hurrr durrrr</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .mydiv {width: 25px; height: 25px;background-color:yellow; margin:1px; float: left; margin-left: 20px}
+        </style>
+    </head>
+    <body>
+        <div id ='outer' style='margin: auto; width: 552px' >
+            <div id ="styleOne" class="mydiv"></div>
+            <div id ="styleTwo" class="mydiv"></div>
+            <div id ="styleThree" class="mydiv"></div>
+            <div id ="styleFour" class="mydiv"></div>
+            <div id ="styleFive" class="mydiv"></div>
+            <div id ="styleSix" class="mydiv"></div>
+            <div id ="styleSeven" class="mydiv"></div>
+            <div id ="styleEight" class="mydiv"></div>
+            <div id ="styleNine" class="mydiv"></div>
+            <div id ="styleTen" class="mydiv"></div>
+            <div id ="styleElleven" class="mydiv"></div>
+            <div id ="styleTwelve" class="mydiv"></div>
+        </div>
+        <br>
+        <br>
+        <p id ='emptyP' align='center' ></p>
+        <br>
+        <br>
+
+        <p id ='ulP' align='center'></p>
+        <form>
+            <input type ='text' name ='okok' id = 'textField' value=''/><input type='submit' value='add name' id = 'addName'/>
+            <input type="submit" value="Remove First" id='buttonFirst'/><input type="submit" value="Remove Last" id='buttonLast'/>
+        </form>
+
+    </body>
+
+    <!--b) Create a FORM with an input field + a submit button as sketched here.
+    
+    Write the necessary code to add the new name to the array of names, and regenerate the <ul> with the updated list.
+    
+    Hint: You will probably see, very shortly that the name is added, the screen flickers and it's gone again.
+    The problem is, that it submits to the server, so the full page is reloaded. 
+    To prevent this you can call .preventDefault() on the event argument which will prevent the default behaviour (submit) and it should work. 
+    You can also use preventDefault() to prevent a link from actually forwarding to the link-address.-->
+
+
+    <script>
+        var nameArray = ["Oscar", "Troels", "Michael", "Klamme Kris"];
+        document.getElementById("outer").onclick = hiFromId;
+
+        function addNameToArray(evt) {
+            if (document.getElementById("textField").value !== "") {
+                evt.preventDefault();
+                nameArray.push(document.getElementById("textField").value);
+                document.getElementById('ulP').innerHTML = makeArrayAIntoUL(nameArray);
+                setPage();
+            }
+        }
+        document.getElementById("addName").addEventListener("click", addNameToArray);
+
+        function hiFromId(evt) {
+            const id = evt.target.id;
+            document.getElementById("emptyP").innerHTML = "Hello from " + id + "<br>this: " + this.id + "<br> Target: " + id;
+            console.log("Hello from " + id);
+            console.log("this: " + this.id);
+            console.log("Target: " + id);
+        }
+
+        function removeFirst(evt) {
+            evt.preventDefault();
+            nameArray.shift(1);
+            setPage();
+        }
+        function removeLast(evt) {
+            evt.preventDefault();
+            nameArray.pop(1);
+            setPage();
+        }
+        function setPage() {
+            document.getElementById("textField").value = "";
+            document.getElementById("ulP").innerHTML = makeArrayAIntoUL(nameArray);
+        }
+        setPage();
+
+        function makeArrayAIntoUL(array) {
+            let listNames = array.map(name => name = `<li>${name}</li>`);
+            return `<ul>${listNames.join("")}</ul>`;
+        }
+
+        document.getElementById('ulP').innerHTML = makeArrayAIntoUL(nameArray);
+        document.getElementById('addName').addEventListener("click", addNameToArray);
+        document.getElementById('buttonFirst').addEventListener("click", removeFirst);
+        document.getElementById('buttonLast').addEventListener("click", removeLast);
+    </script>
+</html>

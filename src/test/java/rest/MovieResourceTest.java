@@ -126,6 +126,16 @@ public class MovieResourceTest {
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("name", hasItems("Il Nombre Del Padre","bbb","bbq"));
     }
+    @Test
+    public void testGetAllMoviesAgain() throws Exception {
+        
+        given().
+                contentType("application/json")
+                .get("/movie/all").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("[0].actors", hasItems("Crash Bandicoot"));
+    }
 
     @Test
     public void testGetMovieFromName() throws Exception {

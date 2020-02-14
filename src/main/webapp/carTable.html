@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>car table</title>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            td{
+                padding: 3px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id='cartable'></div>
+        <input type ='number' id='priceInput' value=''/><button id='filterButton' value='Price less than'>Price Less Than</button>
+        
+
+    </body>
+    <script>
+        var cars = [
+            {id: 1, year: 1997, make: 'Ford', model: 'E350', price: 3000},
+            {id: 2, year: 1999, make: 'Chevy', model: 'Venture', price: 4900},
+            {id: 3, year: 2000, make: 'Chevy', model: 'Venture', price: 5000},
+            {id: 4, year: 1996, make: 'Jeep', model: 'Grand Cherokee', price: 4799},
+            {id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799}
+        ];
+
+        function makeCarTable(array) {
+            let tableString = `<table> <tr> <th>id</th><th>year</th><th>make</th><th>model</th><th>price</th></tr><tr>`;
+            let carsTableArray = array.map(car => car = `<tr><td>${car.id}</td><td>${car.year}</td><td>${car.make}</td><td>${car.model}</td><td>${car.price}</td></tr>`);
+            carsTableArray.forEach(car => {
+                tableString += car;
+            });
+            tableString += `</table> </tr>`;
+            return tableString;
+
+        }
+        
+        function priceLessThan(evt){
+            let priceLessThan = document.getElementById("priceInput").value;
+            if(priceLessThan.value !== "" && priceLessThan.typeof === "number"){
+                evt.preventDefault();
+            }
+            let pricedCars = cars.filter(car => car.price < priceLessThan);
+            document.getElementById('cartable').innerHTML = makeCarTable(pricedCars);
+            
+        }
+        
+                function addNameToArray(evt) {
+            if (document.getElementById("textField").value !== "") {
+                evt.preventDefault();
+                nameArray.push(document.getElementById("textField").value);
+                document.getElementById('ulP').innerHTML = makeArrayAIntoUL(nameArray);
+                setPage();
+            }
+        }
+
+        document.getElementById('cartable').innerHTML = makeCarTable(cars);
+        document.getElementById('filterButton').addEventListener("click", priceLessThan);
+        
+
+
+    </script>
+</html>
