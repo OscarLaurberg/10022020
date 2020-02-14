@@ -1,6 +1,6 @@
 
 function getAllMovies(evt) {
-    (fetch("http://localhost:8080/rest-jpa-devops-starter/api/movie/all")
+    (fetch("https://localhost:8080/rest-jpa-devops-starter/api/movie/all")
             .then(res => res.json()) //in flow1, just do it
             .then(data => {
                 //console.log("data", data);
