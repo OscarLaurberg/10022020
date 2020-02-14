@@ -6,7 +6,15 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Fetch from movieAPI</title>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            td{
+                padding: 3px;
+            }
+        </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -27,12 +35,12 @@ and open the template in the editor.
                     .then(data => {
                         // Inside this callback, and only here, the response data is available
                         console.log("data", data);
-                        let tableString =  "<table> <tr> <th>Title</th><th>Year</th></tr>";
+                        let tableString = "<table> <tr> <th>Title</th><th>Year</th></tr>";
                         let movieTableArray = data.map(data => data = `<tr><td>${data.name} </td><td>${data.year} </td></tr>`);
-                        movieTableArray.forEach ( data => {
+                        movieTableArray.forEach(data => {
                             tableString += data;
                         });
-                      tableString += "</table> </tr>";
+                        tableString += "</table> </tr>";
                         document.getElementById("movieResult").innerHTML = tableString;
                         /* data now contains the response, converted to JavaScript
                          Observe the output from the log-output above
