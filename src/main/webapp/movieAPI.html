@@ -30,7 +30,7 @@ and open the template in the editor.
     </body>
     <script>
         function getAllMovies(evt) {
-            fetch("http://localhost:8080/rest-jpa-devops-starter/api/movie/all")
+            fetch("api/movie/all")
                     .then(res => res.json()) //in flow1, just do it
                     .then(data => {
                         console.log("data", data);
@@ -45,7 +45,7 @@ and open the template in the editor.
         }
         function getMovieFromId(evt){
             const movieID = document.getElementById("movieId").value;
-            (fetch("http://localhost:8080/rest-jpa-devops-starter/api/movie/" + movieID)
+            (fetch("api/movie/" + movieID)
                     .then(res => res.json())
                     .then(data => {
                         let result = `Title: ${data.name} 
