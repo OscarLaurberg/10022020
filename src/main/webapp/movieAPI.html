@@ -23,7 +23,7 @@ and open the template in the editor.
         <h2>Her arbejder vi med mit eget api</h2>
 
 
-        <input type ='number' id='movieId' value=''/><button id='getUser'>Get movie from id</button><button id='getAllMovies'>Get all movies</button>
+        <input type ='number' id='movieId' value=''/><button id='getMovie'>Get movie from id</button><button id='getAllMovies'>Get all movies</button>
         <div id='movieResult'> </div>
         <br>
         <button onclick="goBack()">Go back</button>
@@ -33,7 +33,6 @@ and open the template in the editor.
             fetch("http://localhost:8080/rest-jpa-devops-starter/api/movie/all")
                     .then(res => res.json()) //in flow1, just do it
                     .then(data => {
-                        // Inside this callback, and only here, the response data is available
                         console.log("data", data);
                         let tableString = "<table> <tr> <th>Title</th><th>Year</th></tr>";
                         let movieTableArray = data.map(data => data = `<tr><td>${data.name} </td><td>${data.year} </td></tr>`);
@@ -42,14 +41,23 @@ and open the template in the editor.
                         });
                         tableString += "</table> </tr>";
                         document.getElementById("movieResult").innerHTML = tableString;
-                        /* data now contains the response, converted to JavaScript
-                         Observe the output from the log-output above
-                         Now, just build your DOM changes using the data*/
                     });
-
-
-
+        }
+        function getMovieFromId(evt){
+            const movieID = document.getElementById("movieId").value;
+            (fetch("http://localhost:8080/rest-jpa-devops-starter/api/movie/" + movieID)
+                    .then(res => res.json())
+                    .then(data => {
+                        let result = `Title: ${data.name} 
+                        Year: ${data.year}
+                        Actors: ${data.actors}`;
+                        console.log(result);
+                        document.getElementById("movieResult").innerText = result;
+                        
+                        
+            }));
         }
         document.getElementById('getAllMovies').addEventListener('click', getAllMovies);
+        document.getElementById('getMovie').addEventListener('click', getMovieFromId);
     </script>
 </html>
