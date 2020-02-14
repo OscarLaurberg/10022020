@@ -11,52 +11,14 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1 align="center">Simple DOM manipulation and Event handling</h1>
+        <h1 align="center">Javascript</h1>
         <div style="margin: auto; width: 20%">
-            <p id='text'></p>
-            <form>
-                <input type="text" name="name" value="" id='textField'/><input type="submit" value="Add name" id='button'/><br><br>
-                <input type="submit" value="Remove First" id='buttonFirst'/><input type="submit" value="Remove Last" id='buttonLast'/>
-            </form>
         </div>
         <br>
         <br>
         <p align='center'><a href="index.html">Go Back</a></p>
         <script>
-            var array = ["Michael", "Cahit", "Andreas", "Marcus", "Allan", "Nina", "Caroline", "Tobias", "Bob", "Sam"];
-            function arrayAsListHTML(array) {
-                var result = "<ul>";
-                array.forEach(function (str) {
-                    result += "<li>" + str + "</li>";
-                });
-                result += "</ul>";
-                return result;
-            }
-            function setPage() {
-                document.getElementById("textField").value = "";
-                document.getElementById("text").innerHTML = arrayAsListHTML(array);
-            }
-            function addNameToArray(evt) {
-                if (document.getElementById("textField").value !== "") {
-                    evt.preventDefault();
-                    array.push(document.getElementById("textField").value);
-                    setPage();
-                }
-            }
-            function removeFirst(evt) {
-                evt.preventDefault();
-                array.shift(1);
-                setPage();
-            }
-            function removeLast(evt) {
-                evt.preventDefault();
-                array.pop(1);
-                setPage();
-            }
-            setPage();
-            document.getElementById('button').addEventListener("click", addNameToArray);
-            document.getElementById('buttonFirst').addEventListener("click", removeFirst);
-            document.getElementById('buttonLast').addEventListener("click", removeLast);
+        
         </script>
     </body>
 </html>
