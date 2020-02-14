@@ -81,7 +81,10 @@ and open the template in the editor.
         </div>
         <br>
         <div class="wrapper">
-            <button Onclick="window.location.reload();">(C) Calc</button>
+            <button Onclick="window.location.reload();">(AC) Calc</button>
+            <br>
+            <br>
+            <button onclick="goBack()">Go back</button>
         </div>
 
     </body>
@@ -147,6 +150,9 @@ and open the template in the editor.
                 }, 0);
                 document.getElementById("display").innerText = result;
             }
+        }
+         function goBack(){
+            window.history.back();
         }
 
     </script>

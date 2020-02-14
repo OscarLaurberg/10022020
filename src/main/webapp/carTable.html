@@ -21,6 +21,9 @@ and open the template in the editor.
     <body>
         <div id='cartable'></div>
         <input type ='number' id='priceInput' value=''/><button id='filterButton' value='Price less than'>Price Less Than</button>
+        <br>
+        <br>
+         <button onclick="goBack()">Go back</button>
         
 
     </body>
@@ -66,6 +69,10 @@ and open the template in the editor.
         document.getElementById('cartable').innerHTML = makeCarTable(cars);
         document.getElementById('filterButton').addEventListener("click", priceLessThan);
         
+         function goBack(){
+            window.history.back();
+        }
+
 
 
     </script>

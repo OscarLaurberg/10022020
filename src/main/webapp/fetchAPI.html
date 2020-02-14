@@ -14,8 +14,12 @@
     </head>
     <body>
         <h2>Her arbejder vi med verdens langsomste API:</h2>
+        <h5>*Efter jeg lavede opgaven, er der blevet givet et nyt API til Chuck-Norris Jokes, da dette User-api er noget ustabilt. Jeg "gad" ikke at lave det om, så håber på at det er muligt at tilgå user-api'et når i kigger på disse opgaver*</h5>
+            
         <input type ='number' id='userNumber' value=''/><button id='getUser'>Fetch!</button><button id='getAllUsers'>Fetch all!</button>
         <div id='userFromId'></div>
+        <br>
+         <button onclick="goBack()">Go back</button>
     </body>
 
     <script>
@@ -64,7 +68,10 @@
 
 
         }
-
+        
+        function goBack(){
+            window.history.back();
+        }
 
 
         document.getElementById('getUser').addEventListener("click", getUser);

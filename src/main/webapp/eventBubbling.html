@@ -33,6 +33,8 @@
             <input type ='text' name ='okok' id = 'textField' value=''/><input type='submit' value='add name' id = 'addName'/>
             <input type="submit" value="Remove First" id='buttonFirst'/><input type="submit" value="Remove Last" id='buttonLast'/>
         </form>
+        <br>
+         <button onclick="goBack()">Go back</button>
 
     </body>
 
@@ -88,10 +90,15 @@
             let listNames = array.map(name => name = `<li>${name}</li>`);
             return `<ul>${listNames.join("")}</ul>`;
         }
+         function goBack(){
+            window.history.back();
+        }
+
 
         document.getElementById('ulP').innerHTML = makeArrayAIntoUL(nameArray);
         document.getElementById('addName').addEventListener("click", addNameToArray);
         document.getElementById('buttonFirst').addEventListener("click", removeFirst);
         document.getElementById('buttonLast').addEventListener("click", removeLast);
+        
     </script>
 </html>
