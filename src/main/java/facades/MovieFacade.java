@@ -96,7 +96,7 @@ public class MovieFacade {
 
     public List<Movie> getAllMovies() {
         EntityManager em = getEntityManager();
-        TypedQuery q = em.createQuery("SELECT m FROM Movie M", Movie.class);
+        TypedQuery q = em.createQuery("SELECT m FROM Movie m order by m.name asc", Movie.class);
         return q.getResultList();
 
     }

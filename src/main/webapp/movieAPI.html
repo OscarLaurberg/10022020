@@ -43,7 +43,7 @@ and open the template in the editor.
                         document.getElementById("movieResult").innerHTML = tableString;
                     });
         }
-        function getMovieFromId(evt){
+        function getMovieFromId(evt) {
             const movieID = document.getElementById("movieId").value;
             (fetch("api/movie/" + movieID)
                     .then(res => res.json())
@@ -53,10 +53,15 @@ and open the template in the editor.
                         Actors: ${data.actors}`;
                         console.log(result);
                         document.getElementById("movieResult").innerText = result;
-                        
-                        
-            }));
+
+
+                    }));
         }
+
+        function goBack() {
+            window.history.back();
+        }
+
         document.getElementById('getAllMovies').addEventListener('click', getAllMovies);
         document.getElementById('getMovie').addEventListener('click', getMovieFromId);
     </script>
