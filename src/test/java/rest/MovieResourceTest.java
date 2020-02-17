@@ -135,12 +135,16 @@ public class MovieResourceTest {
                 .get("/movie/all").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("[2].actors", hasItems("Crash Bandicoot"));
+                .body("[2].actors", hasItems("Crash Bandicoot"),"[0].actors", hasItems("Lille Skid"));
     }
 
+    //Her returneres et array, derfor bruger vi contains
     @Test
     public void testGetMovieFromName() throws Exception {
-        given().contentType("application/json").get("/movie/title/bbb").then().assertThat().body("year", hasItems(2001), "name", hasItems("bbb"));
+        given().contentType("application/json")
+                .get("/movie/title/bbb")
+                .then().assertThat()
+                .body("year", hasItems(2001), "name", hasItems("bbb"));
     }
 
     @Test
@@ -148,7 +152,7 @@ public class MovieResourceTest {
         int id = r1.getId().intValue();
         given().contentType("application/json").
                 get("/movie/{id}", id)
-                .then()
+                .then().assertThat()
                 .statusCode(200)
                 .body("year", equalTo(1993), "name", equalTo("Il Nombre Del Padre"));
     }
