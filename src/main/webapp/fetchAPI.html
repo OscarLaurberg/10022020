@@ -24,7 +24,7 @@
 
     <script>
 
-        function getUser(evt) {
+        function getUser() {
             const userID = document.getElementById('userNumber').value;
             (fetch("https://jsonplaceholder.typicode.com/users/" + userID)
                     .then(res => res.json()) //in flow1, just do it
@@ -47,7 +47,7 @@
                     }));
         }
 
-        function getAllUsers(evt) {
+        function getAllUsers() {
             (fetch("https://jsonplaceholder.typicode.com/users")
                     .then(res => res.json()) //in flow1, just do it
                     .then(data => {
@@ -57,7 +57,7 @@
                         userTableArray.forEach(data => {
                             tableString += data;
                         });
-                        tableString += "</table> </tr>";
+                        tableString += "</table>";
                         document.getElementById("userFromId").innerHTML = tableString;
                         console.log(tableString);
 

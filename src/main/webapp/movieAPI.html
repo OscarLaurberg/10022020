@@ -29,7 +29,7 @@ and open the template in the editor.
         <button onclick="goBack()">Go back</button>
     </body>
     <script>
-        function getAllMovies(evt) {
+        function getAllMovies() {
             fetch("api/movie/all")
                     .then(res => res.json()) //in flow1, just do it
                     .then(data => {
@@ -39,11 +39,11 @@ and open the template in the editor.
                         movieTableArray.forEach(data => {
                             tableString += data;
                         });
-                        tableString += "</table> </tr>";
+                        tableString += "</table>";
                         document.getElementById("movieResult").innerHTML = tableString;
                     });
         }
-        function getMovieFromId(evt) {
+        function getMovieFromId() {
             const movieID = document.getElementById("movieId").value;
             (fetch("api/movie/" + movieID)
                     .then(res => res.json())

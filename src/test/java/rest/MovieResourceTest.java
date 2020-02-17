@@ -126,7 +126,6 @@ public class MovieResourceTest {
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("name", hasItems("Il Nombre Del Padre","bbb","bbq"));
     }
-    //Udkommenteres da jeg på nuværende ikke er 100% sikker på at få den film ud med Crash Bandicoot på rollelisten.
     
     @Test
     public void testGetAllMoviesAgain() throws Exception {
@@ -151,18 +150,9 @@ public class MovieResourceTest {
                 get("/movie/{id}", id)
                 .then()
                 .statusCode(200)
-                .body("year", equalTo(1993));
+                .body("year", equalTo(1993), "name", equalTo("Il Nombre Del Padre"));
     }
 
-//      @Test
-//     public void testGetMovieByIDAgain()throws Exception {
-//         int id = r2.getId().intValue();
-//         given().contentType("application/json").
-//                 get("/movie/{id}",id)
-//                 .then()
-//                 .statusCode(200)
-//                 .assertThat(Arrays.asList("authorArray1"),contains(equalTo("Spyro")));
-//     }
     @Test
     public void testLotto() throws Exception {
 
